@@ -14,30 +14,68 @@ int main(int argc, const char * argv[]) {
         while (true) {
             // 255 unit long array of characters
             char inputChars[255];
+            printf("Input a string: ");
+            fgets(inputChars, 255, stdin);
+            NSString *inputString = [NSString stringWithUTF8String: inputChars];
             
             char inputNumber[2];
-            NSUInteger number = 0;
-            printf("Input a string: ");
-            // limit input to max 255 characters
-            fgets(inputChars, 255, stdin);
-            NSString *inputString = [NSString stringWithUTF8String: inputNumber];
+            NSInteger number = 0;
             
+            printf("Input a number(1-6): ");
             fgets(inputNumber, 2, stdin);
             number = [[NSString stringWithUTF8String:inputNumber] integerValue];
             
             NSLog(@"word: %@",inputString );
-            NSLog(@"number: %lu", (unsigned long)number);
+            NSLog(@"number: %ld", (long)number);
             
             switch (number) {
-                case <#constant#>:
-                    <#statements#>
+                    
+                case 1:
+                    inputString = [inputString uppercaseString ];
+                    NSLog(@"%@", inputString);
                     break;
                     
-                case <#constant#>:
-                    <#statements#>
+                case 2:
+                    inputString = [inputString lowercaseString ];
+                    NSLog(@"%@", inputString);
                     break;
+                    
+                case 3: {
+                    
+                    
+                    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+                    NSNumber *value = [formatter numberFromString:inputString];
+                    if(value == nil){
+                        NSLog(@"%s", "Wrong value. I cannot convert into a number");
+                    } else {
+                        NSLog(@"%lu", [value integerValue]);
+                    }
+                    break;
+                }
+                case 4: {
+                    inputString = [NSString stringWithFormat: @"%@, eh!", inputString];
+                    NSLog(@"%@", inputString);
+                    break;
+                }
+                case 5:
+                    if([inputString characterAtIndex: inputString.length -1] == '?'){
+                        inputString = @"I don't know";
+                        
+                    } else if(([inputString characterAtIndex: inputString.length -1] == '!')){
+                        inputString = @"Whoa, calm down!";
+                    }
+                    NSLog(@"%@", inputString);
+                    break;
+                    
+                case 6:
+                    inputString = [inputString stringByReplacingOccurrencesOfString:@" " withString: @"-"];
+                    NSLog(@"%@", inputString);
+                    break;
+                    
                 default:
+                    
                     break;
+                
             }
             
         }
