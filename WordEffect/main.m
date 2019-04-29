@@ -16,18 +16,18 @@ int main(int argc, const char * argv[]) {
         
         BOOL test = YES;
         while (test) {
-            // 255 unit long array of characters
+          
             
             printf("Input a string: ");
             fgets(inputChars, 255, stdin);
-            NSString *inputString = [NSString stringWithCString:inputChars encoding: NSASCIIStringEncoding ];
-            inputString = [inputString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+            NSMutableString *inputString = [NSMutableString stringWithCString:inputChars encoding: NSASCIIStringEncoding ];
+            inputString = [[NSMutableString alloc]initWithString: [inputString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet]];
             
             NSInteger number = 0;
             
             printf("Input a number(1-8) Choose 9 to exit: ");
             fgets(inputNumber, 255, stdin);
-            number = [[NSString stringWithUTF8String:inputNumber] integerValue];
+            number = [[NSMutableString stringWithUTF8String:inputNumber] integerValue];
             
             NSLog(@"word: %@",inputString );
             NSLog(@"number: %ld", (long)number);
@@ -35,12 +35,12 @@ int main(int argc, const char * argv[]) {
             switch (number) {
                     
                 case 1:
-                    inputString = [inputString uppercaseString ];
+                    inputString =  [[NSMutableString alloc] initWithString:[inputString uppercaseString ]] ;
                     NSLog(@"%@", inputString);
                     break;
                     
                 case 2:
-                    inputString = [inputString lowercaseString ];
+                    inputString =  [[NSMutableString alloc] initWithString:[inputString lowercaseString ]];
                     NSLog(@"%@", inputString);
                     break;
                     
@@ -58,22 +58,22 @@ int main(int argc, const char * argv[]) {
                     break;
                 }
                 case 4: {
-                    inputString = [NSString stringWithFormat: @"%@, eh!", inputString];
+                    inputString =  [[NSMutableString alloc] initWithString:[NSString stringWithFormat: @"%@, eh!", inputString]];
                     NSLog(@"%@", inputString);
                     break;
                 }
                 case 5:
                     if([inputString characterAtIndex: inputString.length -1] == '?'){
-                        inputString = @"I don't know";
+                        inputString = [[NSMutableString alloc] initWithString: @"I don't know"];
                         
                     } else if(([inputString characterAtIndex: inputString.length -1] == '!')){
-                        inputString = @"Whoa, calm down!";
+                        inputString = [[NSMutableString alloc] initWithString: @"Whoa, calm down!"];
                     }
                     NSLog(@"%@", inputString);
                     break;
                     
                 case 6:
-                    inputString = [inputString stringByReplacingOccurrencesOfString:@" " withString: @"-"];
+                    inputString = [[NSMutableString alloc] initWithString:[inputString stringByReplacingOccurrencesOfString:@" " withString: @"-"]];
                     NSLog(@"%@", inputString);
                     break;
                     
@@ -83,14 +83,14 @@ int main(int argc, const char * argv[]) {
                     
                    
                     for (NSString *vowel in vowels) {
-                        inputString = [inputString stringByReplacingOccurrencesOfString:vowel withString:  [vowel uppercaseString]];
+                        inputString = [[NSMutableString alloc] initWithString:[inputString stringByReplacingOccurrencesOfString:vowel withString:  [vowel uppercaseString]]];
                     }
                     NSLog(@"%@", inputString);
                     break;
                 }
                     
                 case 8:
-                    inputString = [inputString stringByReplacingOccurrencesOfString:@" " withString:@"*"];
+                    inputString = [[NSMutableString alloc] initWithString:[inputString stringByReplacingOccurrencesOfString:@" " withString:@"*"]];
                     NSLog(@"%@", inputString);
                     break;
                 case 9:
