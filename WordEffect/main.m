@@ -11,18 +11,20 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
        
+        char inputChars[255];
+        char inputNumber[255];
         while (true) {
             // 255 unit long array of characters
-            char inputChars[255];
+            
             printf("Input a string: ");
             fgets(inputChars, 255, stdin);
-            NSString *inputString = [NSString stringWithUTF8String: inputChars];
+            NSString *inputString = [NSString stringWithCString:inputChars encoding: NSASCIIStringEncoding ];
+            inputString = [inputString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
             
-            char inputNumber[2];
             NSInteger number = 0;
             
             printf("Input a number(1-6): ");
-            fgets(inputNumber, 2, stdin);
+            fgets(inputNumber, 255, stdin);
             number = [[NSString stringWithUTF8String:inputNumber] integerValue];
             
             NSLog(@"word: %@",inputString );
@@ -42,14 +44,15 @@ int main(int argc, const char * argv[]) {
                     
                 case 3: {
                     
-                    
-                    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+//                   NSUInteger value = [inputString integerValue];
+                    NSNumberFormatter *formatter = [NSNumberFormatter new];
                     NSNumber *value = [formatter numberFromString:inputString];
                     if(value == nil){
-                        NSLog(@"%s", "Wrong value. I cannot convert into a number");
+                        NSLog(@"%@", @"Wrong value. I cannot convert into a number");
                     } else {
                         NSLog(@"%lu", [value integerValue]);
                     }
+                    
                     break;
                 }
                 case 4: {
