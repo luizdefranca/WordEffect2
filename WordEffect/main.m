@@ -13,7 +13,9 @@ int main(int argc, const char * argv[]) {
        
         char inputChars[255];
         char inputNumber[255];
-        while (true) {
+        
+        BOOL test = YES;
+        while (test) {
             // 255 unit long array of characters
             
             printf("Input a string: ");
@@ -23,7 +25,7 @@ int main(int argc, const char * argv[]) {
             
             NSInteger number = 0;
             
-            printf("Input a number(1-6): ");
+            printf("Input a number(1-8) Choose 9 to exit: ");
             fgets(inputNumber, 255, stdin);
             number = [[NSString stringWithUTF8String:inputNumber] integerValue];
             
@@ -75,8 +77,24 @@ int main(int argc, const char * argv[]) {
                     NSLog(@"%@", inputString);
                     break;
                     
-                default:
                     
+                case 7: {
+                    NSArray *vowels = @[@"a", @"e", @"i", @"o", @"u"];
+                    
+                   
+                    for (NSString *vowel in vowels) {
+                        inputString = [inputString stringByReplacingOccurrencesOfString:vowel withString:  [vowel uppercaseString]];
+                    }
+                    NSLog(@"%@", inputString);
+                    break;
+                }
+                    
+                case 8:
+                    inputString = [inputString stringByReplacingOccurrencesOfString:@" " withString:@"*"];
+                    NSLog(@"%@", inputString);
+                    break;
+                case 9:
+                    test = NO;
                     break;
                 
             }
